@@ -12,15 +12,17 @@ const categoriesRoutes = require('./routers/categories');
 //const productsRouter = require('./routers/products');
 const usersRoutes = require('./routers/user');
 const ordersRoutes = require('./routers/orders');
-
+const errorHandler = require('./helpers/error-handler');
 require('dotenv/config');
-
+const authJwt = require('./helpers/jwt');
 const api = process.env.API_URL;
 app.use(cors());
 app.options('*', cors());
 //middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(authJwt());
+app.use(errorHandler);
 
 
 
